@@ -49,7 +49,7 @@ table{width:100%;border-collapse:collapse;margin-top:8px}td{padding:6px 4px;bord
 <div id="toast"></div>
 <div id="pause" class="ov hide"><div><h2>Clock paused</h2><p class="dim">You left the screen. Time stops while you are away.</p><button class="btn" id="resume">Back to the job</button></div></div>
 <script>
-const CONFIG={API_URL:"",HINT_PENALTY_MS:10000}; // paste your Apps Script web-app URL into API_URL
+const CONFIG={API_URL:"https://script.google.com/macros/s/AKfycbz_nnZcJt_6HlVo-6fzBGbw7wPb1N-Sgy6jUyQy7-TxusUghM0hvFZUfkqoizsZ2w4UBg/exec",HINT_PENALTY_MS:10000}; // paste your Apps Script web-app URL into API_URL
 const $=s=>document.querySelector(s),app=$('#app');
 const fmt=ms=>{const s=Math.floor(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1800)};
