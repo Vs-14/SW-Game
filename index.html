@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Section Wars: The Heist</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b1c2e;--deep:#07131f;--chalk:#e8eef4;--steel:#6d8399;--brass:#d6a64b;--alarm:#e23b41;--grid:rgba(232,238,244,.07)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--deep);color:var(--chalk);font:16px/1.5 'Special Elite','Courier New',monospace}
+body{background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;padding-top:env(safe-area-inset-top,0)}
+h1,h2,h3,.big{font-family:'Big Shoulders Display','Impact','Arial Narrow',sans-serif;font-weight:900;letter-spacing:.02em;margin:0;line-height:1}
+#bar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;background:var(--ink);border-bottom:2px solid var(--brass)}
+#bar .brand{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:20px}
+#hud{display:flex;gap:12px;align-items:baseline;font-size:13px;color:var(--steel)}
+#clock{font-family:'Big Shoulders Display',Impact,sans-serif;font-size:26px;color:var(--brass);min-width:62px;text-align:right}
+#app{max-width:760px;margin:0 auto;padding:16px 14px 60px}
+.card{background:var(--ink);border:1px solid var(--steel);padding:20px;position:relative;margin-bottom:16px}
+.card:before{content:"";position:absolute;inset:5px;border:1px dashed rgba(232,238,244,.18);pointer-events:none}
+h1{font-size:clamp(40px,11vw,72px)}h2{font-size:34px;color:var(--brass)}
+p{margin:.6em 0}.dim{color:var(--steel)}
+button,input.t{font:inherit}
+.btn{background:var(--brass);color:var(--deep);border:0;padding:12px 22px;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;cursor:pointer;margin-top:10px}
+.btn.alt{background:transparent;color:var(--chalk);border:1px solid var(--steel);font-size:17px;padding:8px 14px}
+.btn:focus-visible,.cl:focus-visible{outline:3px solid var(--chalk);outline-offset:2px}
+input.t{width:100%;background:var(--deep);color:var(--chalk);border:1px solid var(--steel);padding:12px;font-size:18px;text-transform:uppercase;margin-top:10px}
+.stamp{display:inline-block;border:4px solid var(--alarm);color:var(--alarm);padding:2px 14px;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:44px;transform:rotate(-6deg);margin:6px 0 10px;animation:st .35s ease-out}
+@keyframes st{from{transform:rotate(-6deg) scale(1.7);opacity:0}}
+.err{color:var(--alarm);min-height:1.4em}
+table{width:100%;border-collapse:collapse;margin-top:8px}td{padding:6px 4px;border-bottom:1px solid rgba(232,238,244,.15)}td:last-child{text-align:right;color:var(--brass)}
+#grid{display:grid;gap:2px;justify-content:start;padding:2px}
+.c{width:var(--cs);height:var(--cs);position:relative;display:flex;align-items:center;justify-content:center;font-size:calc(var(--cs)*.55);font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900}
+.c.f{background:rgba(232,238,244,.06);border:1px solid var(--steel);cursor:pointer}
+.c.w{background:rgba(214,166,75,.18)}.c.s{background:var(--brass);color:var(--deep)}
+.c.ok{color:var(--brass)}.c.s.ok{color:var(--deep)}.c.bad{background:rgba(226,59,65,.55);color:#fff}.c.h{font-style:italic;color:var(--steel)}
+.c i{position:absolute;top:1px;left:2px;font:normal 9px/1 'Special Elite',monospace;color:var(--steel)}.c.s i{color:var(--deep)}
+#gw{overflow-x:auto;padding:6px 0}
+#cur{min-height:3em;border-left:4px solid var(--brass);padding:4px 10px;margin:8px 0;background:rgba(0,0,0,.25)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:560px){.cols{grid-template-columns:1fr}}
+.cl{display:block;width:100%;text-align:left;background:none;border:0;color:var(--chalk);padding:4px 0;cursor:pointer;font-size:14px}
+.cl.d{color:var(--brass);text-decoration:line-through}
+.pad{display:grid;gap:4px}.kr{display:flex;gap:4px;justify-content:center}.k{flex:1;max-width:44px;min-height:44px;background:var(--ink);color:var(--chalk);border:1px solid var(--steel);font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:20px;cursor:pointer;padding:0}.k:active{background:var(--brass);color:var(--deep)}#np{grid-template-columns:repeat(3,1fr);max-width:260px;margin-top:10px}#np .k{max-width:none}#kp{position:sticky;bottom:0;background:var(--deep);padding:6px 0 calc(6px + env(safe-area-inset-bottom,0));z-index:4}select.t{text-transform:none}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translateX(-50%);background:var(--alarm);padding:8px 16px;z-index:9;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.on{opacity:1}
+.ov{position:fixed;inset:0;background:rgba(7,19,31,.94);z-index:20;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}.hide{display:none}
+@media(prefers-reduced-motion:reduce){.stamp{animation:none}}
+</style></head><body>
+<div id="bar"><div class="brand">Section Wars: The Heist</div><div id="hud"><span id="who"></span><span id="lv"></span><span id="clock">00:00</span></div></div>
+<main id="app"></main>
+<div id="toast"></div>
+<div id="pause" class="ov hide"><div><h2>Clock paused</h2><p class="dim">You left the screen. Time stops while you are away.</p><button class="btn" id="resume">Back to the job</button></div></div>
+<script>
+const CONFIG={API_URL:"",HINT_PENALTY_MS:10000}; // paste your Apps Script web-app URL into API_URL
+const $=s=>document.querySelector(s),app=$('#app');
+const fmt=ms=>{const s=Math.floor(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1800)};
+//GEN-START
+function layout(order){
+ const g=new Map(),placed=[],key=(r,c)=>r+','+c,at=(r,c)=>g.get(key(r,c));
+ function fits(a,r,c,d){const dr=d?1:0,dc=d?0:1;
+  if(at(r-dr,c-dc)||at(r+dr*a.length,c+dc*a.length))return -1;let x=0;
+  for(let i=0;i<a.length;i++){const rr=r+dr*i,cc=c+dc*i,cell=at(rr,cc);
+   if(cell){if(cell.ch!==a[i]||cell.dirs.has(d))return -1;x++}
+   else if(at(rr+dc,cc+dr)||at(rr-dc,cc-dr))return -1}
+  return x}
+ function put(a,clue,r,c,d){const dr=d?1:0,dc=d?0:1;
+  for(let i=0;i<a.length;i++){const k=key(r+dr*i,c+dc*i);let cell=g.get(k);if(!cell){cell={ch:a[i],dirs:new Set()};g.set(k,cell)}cell.dirs.add(d)}
+  placed.push({a,clue,r,c,d})}
+ function area(r,c,d,n){let r0=1e9,r1=-1e9,c0=1e9,c1=-1e9;
+  const add=(rr,cc)=>{r0=Math.min(r0,rr);r1=Math.max(r1,rr);c0=Math.min(c0,cc);c1=Math.max(c1,cc)};
+  for(const k of g.keys()){const[p,q]=k.split(',').map(Number);add(p,q)}
+  add(r,c);add(r+(d?n-1:0),c+(d?0:n-1));return(r1-r0+1)*(c1-c0+1)}
+ put(order[0][0],order[0][1],0,0,0);
+ let pend=order.slice(1);
+ while(pend.length){let prog=false;const next=[];
+  for(const[a,clue]of pend){let best=null;
+   for(const p of placed)for(let i=0;i<p.a.length;i++)for(let j=0;j<a.length;j++){
+    if(p.a[i]!==a[j])continue;const d=1-p.d,pr=p.r+(p.d?i:0),pc=p.c+(p.d?0:i);
+    const r=d?pr-j:pr,c=d?pc:pc-j,x=fits(a,r,c,d);if(x<1)continue;
+    const sc=area(r,c,d,a.length)-x*3;if(!best||sc<best.sc)best={r,c,d,sc}}
+   if(best){put(a,clue,best.r,best.c,best.d);prog=true}else next.push([a,clue])}
+  if(!prog)return null;pend=next}
+ let r0=1e9,c0=1e9,r1=-1e9,c1=-1e9;
+ for(const k of g.keys()){const[p,q]=k.split(',').map(Number);r0=Math.min(r0,p);c0=Math.min(c0,q);r1=Math.max(r1,p);c1=Math.max(c1,q)}
+ placed.forEach(x=>{x.r-=r0;x.c-=c0});
+ return{words:placed,w:c1-c0+1,h:r1-r0+1,area:(r1-r0+1)*(c1-c0+1)}}
+function gen(words){
+ const base=[...words].sort((a,b)=>b[0].length-a[0].length||a[0].localeCompare(b[0]));let best=null;
+ for(let k=0;k<base.length;k++){const r=layout([...base.slice(k),...base.slice(0,k)]);if(r&&(!best||r.area<best.area))best=r}
+ if(!best)return null;let n=0;const st={};
+ best.words.forEach(x=>{const k=x.r+','+x.c;if(!st[k])st[k]=++n;x.num=st[k]});
+ return best}
+//GEN-END
+
+const LEVELS1=[
+{name:'Silver Screen',brief:'Famous heist movies, series and games.',words:[
+['DHOOM','Bollywood franchise where bikes outrun the cops'],['BERLIN','Money Heist planner with style, also a German capital'],
+['PROFESSOR','Mastermind behind the Royal Mint plan'],['TOKYO','Money Heist narrator, also a Japanese capital'],
+['ITALIANJOB','Mini Coopers and a Turin gold robbery (2 words)'],['OCEANSELEVEN','Danny Ocean and his Vegas crew, count in the title (2 words)'],
+['FURIOUS','Fast and ___, the Toretto crew franchise'],['GTA','Video game: Grand Theft ___']]},
+{name:'The Kit',brief:'Tools of the trade.',words:[
+['MASK','Hides your face; Money Heist ones are Dali'],['CROWBAR','Pry-open tool, bent at one end'],['LOCKPICK','Opens a lock without the key (2 words)'],
+['DUFFELBAG','Where the loot goes (2 words)'],['BLUEPRINT','Plan of the building'],['GLOVES','Keeps your fingerprints off everything'],
+['WALKIETALKIE','Crew radio (2 words)'],['CCTV','Cameras you need to loop'],['LASER','Beam grid you must not touch'],['VAULT','Where the money is kept']]},
+{name:'The Crew',brief:'Roles and lingo of the job.',words:[
+['HACKER','Cracks the security system'],['DRIVER','Waits outside with the engine running'],['ALIBI','Proof you were somewhere else'],
+['DECOY','A distraction to pull attention away'],['LOOT','What you came for'],['FENCE','Buys stolen goods from the crew'],
+['GETAWAY','The escape, as in ___ car'],['MASTERMIND','The one who plans it all']]}];
+
+function crossword(L,host,api){
+ const G=gen(L.words);if(!G){host.textContent='Layout failed';return}
+ const{w,h,words}=G,cells=Array.from({length:h},()=>Array(w).fill(null));
+ words.forEach((x,i)=>{for(let k=0;k<x.a.length;k++){const r=x.r+(x.d?k:0),c=x.c+(x.d?0:k);
+  const cell=cells[r][c]||(cells[r][c]={ch:x.a[k],v:'',n:0,r,c});cell[x.d?'dn':'ac']=i;if(k===0)cell.n=x.num}});
+ const sv=api.load();if(sv&&sv.v&&sv.v.length===w*h)cells.forEach((row,r)=>row.forEach((c,q)=>{if(c){const ch=sv.v[r*w+q];c.v=ch==='.'?'':ch}}));
+ const cs=Math.max(28,Math.floor(Math.min(40,(Math.min(innerWidth,760)-40)/w)));
+ host.innerHTML=`<div id="cur"></div><div id="gw"><div id="grid" style="--cs:${cs}px;grid-template-columns:repeat(${w},${cs}px)"></div></div><div class="pad" id="kp"></div>
+ <button class="btn alt" id="hint">Reveal a letter (+${CONFIG.HINT_PENALTY_MS/1000}s)</button>
+ <div class="cols"><div><h3>Across</h3><div id="ac"></div></div><div><h3>Down</h3><div id="dn"></div></div></div>`;
+ const grid=$('#grid'),el=[];
+ for(let r=0;r<h;r++){el.push([]);for(let c=0;c<w;c++){const d=document.createElement('div'),cell=cells[r][c];d.className='c'+(cell?' f':'');
+  if(cell){d.onclick=()=>pick(r,c)}grid.appendChild(d);el[r].push(d)}}
+ const first=words.find(x=>x.num===1);let sel={r:first.r,c:first.c,d:first.d};
+ const wi=()=>cells[sel.r][sel.c][sel.d?'dn':'ac'];
+ const wc=i=>{const x=words[i],o=[];for(let k=0;k<x.a.length;k++)o.push(cells[x.r+(x.d?k:0)][x.c+(x.d?0:k)]);return o};
+ const wordOk=i=>wc(i).every(c=>c.v===c.ch);
+ function pick(r,c){const cell=cells[r][c];
+  if(sel.r===r&&sel.c===c&&cell.ac!==undefined&&cell.dn!==undefined)sel.d=1-sel.d;
+  else{sel.r=r;sel.c=c;if(cell[sel.d?'dn':'ac']===undefined)sel.d=1-sel.d}
+  update()}
+ function update(){const i=wi(),cur=new Set(wc(i));
+  for(let r=0;r<h;r++)for(let c=0;c<w;c++){const cell=cells[r][c];if(!cell)continue;const d=el[r][c];
+   d.className='c f'+(cur.has(cell)?' w':'')+(sel.r===r&&sel.c===c?' s':'')+(cell.bad?' bad':'')+(cell.hint?' h':'')+((cell.ac!==undefined&&wordOk(cell.ac))||(cell.dn!==undefined&&wordOk(cell.dn))?' ok':'');
+   d.innerHTML=(cell.n?'<i>'+cell.n+'</i>':'')+cell.v}
+  const x=words[i];$('#cur').textContent=x.num+(x.d?' Down: ':' Across: ')+x.clue+' ('+x.a.length+')';
+  for(const d of[0,1])$(d?'#dn':'#ac').innerHTML=words.map((x,k)=>x.d===d?x:0).filter(Boolean).sort((p,q)=>p.num-q.num).map(x=>`<button class="cl${wordOk(words.indexOf(x))?' d':''}" data-i="${words.indexOf(x)}">${x.num}. ${x.clue} (${x.a.length})</button>`).join('');
+  document.querySelectorAll('.cl').forEach(b=>b.onclick=()=>{const x=words[b.dataset.i];sel={r:x.r,c:x.c,d:x.d};update()})}
+ function step(n){const i=wi(),cl=wc(i),k=Math.max(0,Math.min(cl.length-1,cl.indexOf(cells[sel.r][sel.c])+n));sel.r=cl[k].r;sel.c=cl[k].c}
+ function after(){update();api.save({v:cells.flat().length?cells.map(r=>r.map(c=>c?(c.v||'.'):'.').join('')).join(''):''});
+  const all=cells.flat().filter(Boolean);
+  if(all.every(c=>c.v)){const wrong=all.filter(c=>c.v!==c.ch);
+   if(!wrong.length)return api.complete();wrong.forEach(c=>c.bad=true);update();toast('Some letters are wrong. Keep cracking.')}}
+ function type(ch){const c=cells[sel.r][sel.c];if(c.hint)return step(1),update();c.v=ch;c.bad=false;cells.flat().forEach(x=>x&&(x.bad=false));step(1);after()}
+ function back(){const c=cells[sel.r][sel.c];if(c.v&&!c.hint)c.v='';else{step(-1);const p=cells[sel.r][sel.c];if(!p.hint)p.v=''}after()}
+ document.onkeydown=e=>{if(!document.body.contains(host)||/INPUT|SELECT/.test(e.target.tagName))return;
+  if(e.key==='Backspace'){e.preventDefault();back()}else if(/^[a-z]$/i.test(e.key)&&!e.ctrlKey&&!e.metaKey){e.preventDefault();type(e.key.toUpperCase())}
+  else if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();step(1);update()}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();step(-1);update()}};
+ $('#kp').innerHTML=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM<'].map(r=>'<div class="kr">'+[...r].map(k=>`<button class="k" data-k="${k}">${k==='<'?'\u232b':k}</button>`).join('')+'</div>').join('');
+ $('#kp').onclick=e=>{const k=e.target.closest('.k');if(!k)return;k.dataset.k==='<'?back():type(k.dataset.k)};
+ $('#hint').onclick=()=>{const c=cells[sel.r][sel.c];if(c.v===c.ch)return toast('Already correct');c.v=c.ch;c.hint=true;api.penalty(CONFIG.HINT_PENALTY_MS);toast('+'+CONFIG.HINT_PENALTY_MS/1000+'s on the clock');after()};
+ update()}
+
+const GAMES=[
+{name:'The Prep',tag:'Game 1: Crossword',how:'Tap a cell and type. Tap the same cell again to switch between Across and Down. Wrong letters cost nothing, but revealing a letter adds 10 seconds. Your clock only runs while this screen is open. Close the tab and it pauses; log back in with your roll number to carry on.',levels:LEVELS1,play:crossword},
+{name:'The Lock',tag:'Game 2: Lock cracking',levels:[1,2,3],play:null},
+{name:'The Fight',tag:'Game 3: Shooter',levels:[1,2,3],play:null},
+{name:'The Getaway',tag:'Game 4: Escape',levels:[1,2,3],play:null}];
+
+let P=null,run=false,last=0,inPlay=false;
+const KEY=r=>'sw_heist_'+r;
+const total=()=>Object.values(P.done).reduce((a,b)=>a+b,0)+P.cur;
+const save=()=>{try{localStorage.setItem(KEY(P.roll),JSON.stringify(P))}catch(e){}};
+function sync(kind,extra){if(!CONFIG.API_URL||!P)return;
+ fetch(CONFIG.API_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:kind,roll:P.roll,progress:P,total:total(),...extra})}).catch(()=>{})}
+function accrue(){if(run){const n=performance.now();P.cur+=n-last;last=n}}
+function startClock(){inPlay=true;run=true;last=performance.now()}
+function stopClock(){accrue();run=false;save()}
+setInterval(()=>{accrue();if(P){$('#clock').textContent=fmt(total())}},250);
+setInterval(()=>{if(run){accrue();save()}},5000);
+function away(){if(inPlay&&run){stopClock();sync('save');$('#pause').classList.remove('hide')}}
+document.addEventListener('visibilitychange',()=>document.hidden&&away());
+addEventListener('pagehide',away);
+$('#resume').onclick=()=>{$('#pause').classList.add('hide');startClock()};
+
+function login(msg){P=null;inPlay=false;$('#who').textContent='';$('#lv').textContent='';
+ app.innerHTML=`<div class="card"><div class="stamp">Classified</div><h1>Section Wars: The Heist</h1>
+ <p>Four jobs. Twelve levels. One clock. Pick your programme and enter your roll number to join the crew. If you have played before, you pick up where you left off.</p>
+ <select class="t" id="prog" aria-label="Programme"><option value="">Select programme</option><option>BM</option><option>HR</option><option>BI</option><option>BL</option></select>
+ <input class="t" id="roll" inputmode="numeric" pattern="[0-9]*" placeholder="Roll number (up to 3 digits)" maxlength="3" autocomplete="off" aria-label="Roll number">
+ <div class="pad" id="np"></div><div class="err" id="err">${msg||''}</div><button class="btn" id="go">Join the crew</button></div>`;
+ const R=$('#roll');R.oninput=()=>{R.value=R.value.replace(/\D/g,'')};
+ $('#np').innerHTML=[1,2,3,4,5,6,7,8,9,'C',0,'<'].map(k=>`<button class="k" data-k="${k}">${k==='<'?'\u232b':k}</button>`).join('');
+ $('#np').onclick=e=>{const k=e.target.closest('.k');if(!k)return;const v=k.dataset.k;R.value=v==='<'?R.value.slice(0,-1):v==='C'?'':(R.value+v).slice(0,3)};
+ const go=async()=>{const prog=$('#prog').value,num=R.value.replace(/\D/g,'');
+  if(!prog)return $('#err').textContent='Select your programme.';
+  if(!num)return $('#err').textContent='Enter your roll number (digits only).';
+  const roll=prog+parseInt(num,10);
+  let loc=null;try{loc=JSON.parse(localStorage.getItem(KEY(roll)))}catch(e){}
+  let rem=null,nm=null;if(CONFIG.API_URL){try{const r=await fetch(CONFIG.API_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'login',roll,prog,num})});const j=await r.json();
+   if(j.ok===false)return $('#err').textContent=j.error||'Roll number not found.';rem=j.progress||null;nm=j.name||null}catch(e){}}
+  const score=p=>p?(p.g*10+p.l)*1e9+Object.keys(p.done).length*1e6+p.cur:-1;
+  P=score(rem)>score(loc)?rem:loc;if(!P)P={roll,g:0,l:0,done:{},cur:0,saves:{}};P.roll=roll;P.saves=P.saves||{};if(nm)P.name=nm;
+  save();$('#who').textContent=P.name?P.name.split(' ')[0]:roll;route()};
+ $('#go').onclick=go}
+
+function route(){inPlay=false;run=false;const G=GAMES[P.g];$('#clock').textContent=fmt(total());
+ $('#lv').textContent='Job '+(P.g+1)+' / Level '+(P.l+1);
+ if(!G.play)return soon();
+ const L=G.levels[P.l],back=P.cur>0||P.g>0||P.l>0;
+ app.innerHTML=`<div class="card"><h2>${G.tag}</h2><h1>${L.name}</h1><p>${L.brief}</p>${P.l===0&&P.cur===0?`<p>${G.how}</p>`:''}
+ ${P.cur>0?'<p class="dim">Welcome back. Your clock is paused at '+fmt(total())+'.</p>':''}<p class="dim">The clock starts when you press the button.</p>
+ <button class="btn" id="st">${P.cur>0?'Resume':'Start'}</button></div>`;
+ $('#st').onclick=play}
+function soon(){const G=GAMES[P.g];
+ app.innerHTML=`<div class="card"><div class="stamp">Cleared</div><h1>${GAMES[P.g-1]?GAMES[P.g-1].name+' complete':'Nice work'}</h1><p>Total time so far: <b>${fmt(total())}</b></p>
+ ${recap()}<p class="dim">${G.tag} is still being built for this prototype. Your progress is saved under your roll number.</p></div>`;sync('save')}
+const recap=()=>'<table>'+Object.entries(P.done).map(([k,v])=>`<tr><td>Job ${k.split('-')[0]}, level ${k.split('-')[1]}</td><td>${fmt(v)}</td></tr>`).join('')+'</table>';
+
+function play(){const G=GAMES[P.g],L=G.levels[P.l];
+ app.innerHTML=`<h2>${L.name}</h2><div id="host"></div>`;
+ const k=P.g+'-'+P.l;
+ G.play(L,$('#host'),{load:()=>P.saves[k],save:s=>{P.saves[k]=s;save()},penalty:ms=>{P.cur+=ms},complete:()=>done()});
+ startClock()}
+function done(){stopClock();inPlay=false;const G=GAMES[P.g],ms=P.cur,key=(P.g+1)+'-'+(P.l+1);
+ P.done[key]=ms;P.cur=0;delete P.saves[P.g+'-'+P.l];
+ const lastLevel=P.l===G.levels.length-1;
+ if(lastLevel){P.g++;P.l=0}else P.l++;save();sync('level',{level:key,ms});
+ const nextG=GAMES[P.g];
+ app.innerHTML=`<div class="card"><div class="stamp">${lastLevel?'Job cleared':'Level cleared'}</div>
+ <h1>${fmt(ms)}</h1><p>Total time: <b>${fmt(total())}</b></p>
+ <button class="btn" id="nx">${lastLevel?'Next job: '+(nextG?nextG.name:'finish'):'Next level'}</button></div>`;
+ $('#nx').onclick=route}
+login();
+</script></body></html>
