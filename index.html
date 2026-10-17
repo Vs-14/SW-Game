@@ -42,14 +42,51 @@ table{width:100%;border-collapse:collapse;margin-top:8px}td{padding:6px 4px;bord
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translateX(-50%);background:var(--alarm);padding:8px 16px;z-index:9;opacity:0;transition:opacity .2s;pointer-events:none}
 #toast.on{opacity:1}
 .ov{position:fixed;inset:0;background:rgba(7,19,31,.94);z-index:20;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}.hide{display:none}
+.prow{display:flex;gap:10px;margin:12px 0}.pin{width:26px;height:26px;border-radius:50%;border:2px solid var(--steel)}.pin.set{background:var(--brass);border-color:var(--brass)}
+#trk{position:relative;height:56px;background:var(--deep);border:1px solid var(--steel);margin:16px 0}#zn{position:absolute;top:0;bottom:0;background:rgba(63,178,127,.5);border-left:2px solid #3fb27f;border-right:2px solid #3fb27f}#mk{position:absolute;top:-6px;bottom:-6px;width:6px;margin-left:-3px;background:var(--chalk)}
+.dials{display:grid;grid-template-columns:repeat(3,76px);gap:10px;margin:14px 0}.dial{height:76px;background:var(--ink);border:2px solid var(--steel);color:var(--chalk);font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:30px;cursor:pointer}.dial.on{background:var(--brass);color:var(--deep);border-color:var(--brass)}
+.wg{display:inline-grid;gap:2px;margin:10px 0;touch-action:manipulation}.wt{width:var(--ws);height:var(--ws);background:rgba(232,238,244,.06);border:1px solid rgba(109,131,153,.5);cursor:pointer;padding:0}.wt svg{width:100%;height:100%;transition:transform .15s}.wt path{fill:none;stroke:var(--steel);stroke-width:7;stroke-linecap:round}.wt.p path{stroke:var(--brass)}.wt.src{border-left:4px solid var(--brass)}.wt.out{border-right:4px solid var(--alarm)}
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0}.lg{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--steel)}.lg svg{width:30px;height:40px}.lg b{color:var(--chalk)}
+.hud3{display:flex;justify-content:space-between;align-items:center;margin:8px 0;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:22px}.hud3 b{color:var(--brass)}.pip{display:inline-block;width:16px;height:16px;margin-left:5px;border:2px solid var(--steel);transform:rotate(45deg);vertical-align:middle}.pip.on{background:var(--alarm);border-color:var(--alarm)}
+#stg{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;border:2px solid var(--brass);background:radial-gradient(circle at 50% 22%,rgba(214,166,75,.16) 0 64px,transparent 66px),linear-gradient(#0e2540,#07131f);cursor:crosshair;touch-action:manipulation;user-select:none}
+.spot{position:relative;aspect-ratio:3/4;overflow:hidden;background:rgba(232,238,244,.04)}.fig{position:absolute;left:8%;right:8%;bottom:24%;height:72%;transform:translateY(108%);transition:transform .11s ease-out;z-index:1}.fig.up{transform:none}.fig.hit{transform:translateY(108%) rotate(16deg);transition:transform .28s}.fig svg{width:100%;height:100%;pointer-events:none}
+.cover{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(#27496b,#152a40);border-top:4px solid var(--brass);z-index:2}.spot:nth-child(n+5) .cover{height:38%}
+#stg.shake{animation:shk .25s}@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}#stg.flash:after{content:"";position:absolute;inset:0;background:rgba(226,59,65,.28);pointer-events:none}
+.msg3{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;text-align:center;background:rgba(7,19,31,.88);font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:34px;color:var(--alarm)}
 @media(prefers-reduced-motion:reduce){.stamp{animation:none}}
+/* GAME 3 — GRAB THE LOOT: playful burglary-map readability within the heist theme */
+.loot-shell{background:#0a1e30;border:1px solid #6b8292;padding:15px;margin:12px 0 25px;box-shadow:inset 0 0 0 4px #07131f}
+.loot-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;font:900 22px/1 'Big Shoulders Display',Impact,sans-serif;letter-spacing:.055em;color:#efbe67;border-bottom:1px solid #365068;padding-bottom:12px}
+.loot-tag{font:12px/1.4 'Special Elite',monospace;letter-spacing:0;color:#91d5bc;background:#1b403b;border:1px solid #39665b;padding:6px 10px}
+.loot-objective{font-size:13px;line-height:1.6;color:#e0e9ed;margin:11px 0 12px}.loot-objective b{color:#ffd37a}
+.loot-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:0 0 12px}
+.loot-stats>div{background:#0d273a;border:1px solid #314c5d;padding:9px 11px}.loot-stats small{display:block;color:#92b0c0;font-size:10px;letter-spacing:.08em}.loot-stats strong{display:block;margin-top:5px;color:#ffdc87;font:900 25px/1 'Big Shoulders Display',Impact,sans-serif}
+.loot-board-frame{max-width:575px;margin:0 auto;background:#eee5c6;padding:5px;border:2px solid #e5c67c;box-shadow:0 3px 0 #080e14;overflow:hidden}
+.loot-board-frame.caught{animation:loot-caught-shake .32s linear}
+@keyframes loot-caught-shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.loot-board{display:grid;gap:1px;background:#c4b68f;touch-action:none;user-select:none;overflow:hidden}
+.loot-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;position:relative;background:#fff5d8;overflow:visible}
+.loot-cell.is-wall{background:#163e72;box-shadow:inset -2px -2px 0 rgba(8,22,43,.35),inset 1px 1px 0 rgba(90,153,208,.2)}
+.loot-cell.is-exit{background:#bddec4;box-shadow:inset 0 0 0 2px #81ac89}
+.loot-cell.is-exit.unlocked{background:#80d5a2;box-shadow:inset 0 0 0 2px #278e59;animation:exit-glow 1s ease-in-out infinite alternate}
+@keyframes exit-glow{to{box-shadow:inset 0 0 0 2px #278e59,0 0 8px 3px #7dde98}}
+.loot-cell.has-guard{background:#f3c5bf;z-index:2}.loot-cell.has-player{background:#c1e8f4;z-index:3}
+.loot-character{display:block;position:absolute;inset:-9%;width:118%;height:118%;filter:drop-shadow(0 2px 1px #1119);pointer-events:none}
+.loot-item{font-size:clamp(14px,3.2vw,29px);line-height:1;filter:drop-shadow(0 1px 1px #4b340e66);display:block;transform:scale(1.02);white-space:nowrap}
+.loot-exit{font:900 clamp(9px,2vw,16px)/1 'Big Shoulders Display',Impact,sans-serif;color:#12472c;text-align:center;white-space:nowrap;letter-spacing:0}
+.loot-cop-alert{position:absolute;right:-3px;top:-9px;background:#eb454c;color:#fff;border-radius:100px;padding:1px 5px;font:900 11px/1.2 sans-serif}
+.loot-key{display:flex;justify-content:center;gap:12px 18px;align-items:center;flex-wrap:wrap;padding:11px 0 7px;color:#c8d9e3;font-size:11px}.loot-key span{display:flex;align-items:center;gap:5px}.loot-key b{font:900 15px 'Big Shoulders Display',Impact,sans-serif;color:#fff}
+.loot-msg{border-left:3px solid #dfb660;background:#123146;color:#e4eef1;padding:9px 12px;margin:4px 0 12px;min-height:42px;font-size:12px;line-height:1.55}.loot-msg.good{border-color:#71d6a6;color:#c2f2d9}.loot-msg.bad{border-color:#f77d7d;color:#ffd0d0}
+.loot-controls{display:flex;justify-content:center;align-items:center;gap:20px}.loot-dpad{display:grid;grid-template-columns:repeat(3,55px);gap:6px;flex:none}.loot-dpad button{height:49px;width:55px;border:1px solid #8ba7b7;border-radius:8px;background:#284d65;color:#f6f8f9;font:900 22px/1 Impact,sans-serif;cursor:pointer;touch-action:manipulation;box-shadow:0 3px 0 #102738}.loot-dpad button:active{transform:translateY(2px);box-shadow:none;background:#dfb660;color:#112332}.loot-dpad button.stop{background:#5c3d3b;font:900 15px/1 'Big Shoulders Display',Impact,sans-serif;border-color:#956b68}
+.loot-help{max-width:260px;color:#b4c9d3;font-size:12px;line-height:1.6}.loot-help b{color:#f3d48c}.loot-help small{display:block;color:#8aabbc;margin-top:6px;font-size:11px}
+@media(max-width:530px){.loot-shell{padding:9px}.loot-top{font-size:19px}.loot-tag{font-size:10px;padding:5px}.loot-stats>div{padding:8px 6px}.loot-stats strong{font-size:21px}.loot-controls{gap:9px;flex-direction:column}.loot-help{text-align:center;max-width:unset}.loot-help small{margin-top:2px}}
 </style></head><body>
 <div id="bar"><div class="brand">Section Wars: The Heist</div><div id="hud"><span id="who"></span><span id="lv"></span><span id="clock">00:00</span></div></div>
 <main id="app"></main>
 <div id="toast"></div>
 <div id="pause" class="ov hide"><div><h2>Clock paused</h2><p class="dim">You left the screen. Time stops while you are away.</p><button class="btn" id="resume">Back to the job</button></div></div>
 <script>
-const CONFIG={API_URL:"https://script.google.com/macros/s/AKfycbz_nnZcJt_6HlVo-6fzBGbw7wPb1N-Sgy6jUyQy7-TxusUghM0hvFZUfkqoizsZ2w4UBg/exec",HINT_PENALTY_MS:10000}; // paste your Apps Script web-app URL into API_URL
+const CONFIG={API_URL:"",HINT_PENALTY_MS:10000,MISS_PENALTY_MS:3000,CIV_PENALTY_MS:3000,CRASH_PENALTY_MS:5000,ALLY_PENALTY_MS:5000}; // paste your Apps Script web-app URL into API_URL
 const $=s=>document.querySelector(s),app=$('#app');
 const fmt=ms=>{const s=Math.floor(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1800)};
@@ -149,24 +186,326 @@ function crossword(L,host,api){
  $('#hint').onclick=()=>{const c=cells[sel.r][sel.c];if(c.v===c.ch)return toast('Already correct');c.v=c.ch;c.hint=true;api.penalty(CONFIG.HINT_PENALTY_MS);toast('+'+CONFIG.HINT_PENALTY_MS/1000+'s on the clock');after()};
  update()}
 
+
+function rng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const alive=h=>document.body.contains(h);
+function pins(L,host,api){
+ const R=rng(101),N=5,W=[.28,.25,.22,.2,.18],T=[2300,2150,2000,1900,1800];let i=0,t0=performance.now(),zl=0;
+ host.innerHTML=`<p class="dim">Tap PICK (or press Space) while the marker is inside the green zone. A miss adds ${CONFIG.MISS_PENALTY_MS/1000}s.</p><div class="prow">${'<span class="pin"></span>'.repeat(N)}</div><div id="trk"><div id="zn"></div><div id="mk"></div></div><button class="btn" id="pk">PICK</button>`;
+ const zn=$('#zn'),mk=$('#mk'),dots=host.querySelectorAll('.pin');
+ const newZone=()=>{zl=.04+R()*(.92-W[i]);zn.style.left=zl*100+'%';zn.style.width=W[i]*100+'%';t0=performance.now()};
+ const pos=()=>{const p=((performance.now()-t0)%T[i])/T[i];return p<.5?p*2:2-p*2};
+ function hit(){const x=pos();if(x>=zl&&x<=zl+W[i]){dots[i].classList.add('set');i++;if(i===N)return api.complete();newZone()}else{api.penalty(CONFIG.MISS_PENALTY_MS);toast('Missed. +'+CONFIG.MISS_PENALTY_MS/1000+'s')}}
+ $('#pk').onclick=hit;document.onkeydown=e=>{if(e.code==='Space'&&!e.repeat&&alive(host)){e.preventDefault();hit()}};
+ newZone();(function f(){if(!alive(host)||i===N)return;mk.style.left=pos()*100+'%';requestAnimationFrame(f)})()}
+function code(L,host,api){
+ const R=rng(202),lens=[3,4,5,6],sleep=ms=>new Promise(r=>setTimeout(r,ms));let rd=0,pos=0,lock=true,seq=[];
+ const mkSeq=n=>{const a=[];while(a.length<n){const x=Math.floor(R()*9);if(x!==a[a.length-1])a.push(x)}return a},seqs=lens.map(mkSeq);
+ host.innerHTML=`<p class="dim">Watch the dials light up, then repeat the order. Four locks, each longer than the last. A wrong tap adds ${CONFIG.MISS_PENALTY_MS/1000}s and replays the pattern.</p><p id="ms" class="big" style="font-size:26px;color:var(--brass)"></p><div class="dials">${[1,2,3,4,5,6,7,8,9].map((n,k)=>`<button class="dial" data-k="${k}">${n}</button>`).join('')}</div>`;
+ const D=host.querySelectorAll('.dial'),ms=t=>$('#ms').textContent=t;
+ const flash=async x=>{D[x].classList.add('on');await sleep(380);D[x].classList.remove('on')};
+ async function show(){lock=true;seq=seqs[rd];ms('Lock '+(rd+1)+' of '+lens.length+': watch');await sleep(700);
+  for(const x of seq){if(!alive(host))return;flash(x);await sleep(620)}lock=false;pos=0;ms('Your turn')}
+ D.forEach(b=>b.onclick=async()=>{if(lock)return;const x=+b.dataset.k;flash(x);
+  if(x===seq[pos]){pos++;if(pos===seq.length){lock=true;rd++;if(rd===lens.length)return api.complete();ms('Lock opened. Next one...');await sleep(900);show()}}
+  else{lock=true;api.penalty(CONFIG.MISS_PENALTY_MS);toast('Wrong. +'+CONFIG.MISS_PENALTY_MS/1000+'s');ms('Wrong code. Watch again');await sleep(1100);show()}});
+ show()}
+function wires(L,host,api){
+ const R=rng(303),C=5,DR=[-1,0,1,0],DC=[0,1,0,-1],BASE=[[0,2],[0,1]],
+ path=[[0,0],[0,1],[0,2],[0,3],[1,3],[1,2],[1,1],[1,0],[2,0],[2,1],[2,2],[3,2],[3,1],[3,0],[4,0],[4,1],[4,2],[4,3],[4,4]];
+ const g=Array.from({length:C},()=>Array.from({length:C},()=>({ty:R()<.5?0:1,deg:Math.floor(R()*4)*90})));
+ const dirTo=(a,b)=>DR.findIndex((_,d)=>DR[d]===b[0]-a[0]&&DC[d]===b[1]-a[1]);
+ path.forEach((p,k)=>{const din=k?dirTo(path[k-1],p):1,out=k<path.length-1?dirTo(p,path[k+1]):1,back=(din+2)%4,t=g[p[0]][p[1]];
+  t.ty=(back+2)%4===out?0:1;let c=0;for(let r=0;r<4;r++){const o=BASE[t.ty].map(d=>(d+r)%4);if(o.includes(back)&&o.includes(out))c=r}
+  t.deg=t.ty?((c+1+Math.floor(R()*3))%4)*90:((c+1+2*Math.floor(R()*2))%4)*90});
+ const ws=Math.min(64,Math.floor((Math.min(innerWidth,760)-50)/C));
+ host.innerHTML=`<p class="dim">Power enters at the top-left (gold edge). Tap tiles to rotate them until the wire reaches the safe at the bottom-right (red edge).</p><div class="wg" style="--ws:${ws}px;grid-template-columns:repeat(${C},${ws}px)"></div>`;
+ const grid=host.querySelector('.wg'),el=[];
+ for(let r=0;r<C;r++){el.push([]);for(let c=0;c<C;c++){const t=g[r][c],b=document.createElement('button');b.className='wt'+(!r&&!c?' src':'')+(r===C-1&&c===C-1?' out':'');b.setAttribute('aria-label','Rotate tile');
+  b.innerHTML='<svg viewBox="0 0 40 40"><path d="'+(t.ty?'M20 0V20H40':'M20 0V40')+'"/></svg>';b.onclick=()=>{t.deg+=90;update()};grid.appendChild(b);el[r].push(b)}}
+ let done=false;
+ function update(){let r=0,c=0,enter=3,win=false;const on=new Set();
+  for(let r2=0;r2<C;r2++)for(let c2=0;c2<C;c2++)el[r2][c2].firstChild.style.transform='rotate('+g[r2][c2].deg+'deg)';
+  for(let n=0;n<C*C+2;n++){const t=g[r][c],o=BASE[t.ty].map(d=>(d+(t.deg/90)%4)%4);if(!o.includes(enter))break;on.add(r+','+c);
+   const out=o.find(d=>d!==enter);if(r===C-1&&c===C-1&&out===1){win=true;break}
+   r+=DR[out];c+=DC[out];enter=(out+2)%4;if(r<0||c<0||r>=C||c>=C)break}
+  for(let r2=0;r2<C;r2++)for(let c2=0;c2<C;c2++)el[r2][c2].classList.toggle('p',on.has(r2+','+c2));
+  if(win&&!done){done=true;toast('Circuit closed. The safe is open.');setTimeout(()=>api.complete(),600)}}
+ update()}
+
+let AC=null;const beep=(f,d,ty)=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=ty||'square';o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(AC.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);o.stop(AC.currentTime+d)}catch(e){}};
+// GAME 3 — GRAB THE LOOT V2: BitLife-inspired, fully playable standalone HTML.
+// Three maze floors, continuous movement, randomly roaming police, illustrated sprites and distinct valuables.
+const MAZE_LEVELS = [
+ {name:'The Back Entrance',brief:'Collect 3 valuables, dodge the officer, and reach the EXIT.',guardMs:[620],playerMs:185,
+  map:['#########','#S......#','#.###.#.#','#..$..#.#','#.#.#...#','#...#...#','#.#...#.#','#.$...$E#','#########'],
+  guards:[[4,3]],items:['💎','💵','💍']},
+ {name:'The Collection Floor',brief:'Grab 4 valuables while two faster officers wander the floor.',guardMs:[490,530],playerMs:177,
+  map:['###########','#S.....#..#','#.###..#$.#','#...#.....#','#.#...###.#','#.#.#$....#','#...#.#.#.#','###...#...#','#.$.#...$.#','#...#...#E#','###########'],
+  guards:[[6,3],[3,8]],items:['💎','💍','💵','⌚']},
+ {name:'The Final Sweep',brief:'Five valuables, three fast officers. Make it to the extraction point.',guardMs:[400,435,475],playerMs:172,
+  map:['#############','#S....#....$#','#.##..#.#.#.#','#....##.#...#','#.#..$..#.#.#','#.#.###.....#','#...#...#$#.#','###...#.#...#','#.$.#...$...#','#.....##...E#','#############'],
+  guards:[[9,1],[9,5],[10,9]],items:['💵','💍','💎','⌚','💰']}
+];
+const ROBBER_ART=`<svg class="loot-character" viewBox="0 0 64 64" role="img" aria-label="Robber">
+ <ellipse cx="32" cy="57" rx="22" ry="4" fill="#162b44" opacity=".3"/>
+ <path d="M18 47Q12 48 12 58H52Q52 48 46 47Z" fill="#293a46" stroke="#182b3c" stroke-width="2"/>
+ <path d="M18 45H46V55H18Z" fill="#2a3844"/><path d="M18 47H46M18 53H46" stroke="#d8e0e2" stroke-width="4"/>
+ <path d="M43 40q18-6 14 12l-3 6H42l-2-7z" fill="#c89839" stroke="#825b22" stroke-width="2"/>
+ <ellipse cx="32" cy="29" rx="17" ry="17" fill="#e0ad89" stroke="#493329" stroke-width="1.5"/>
+ <path d="M15 26q2-24 18-23 16 0 17 24l-7-1-1-5H21l-1 5z" fill="#24242c"/>
+ <path d="M15 23q16-8 35 0v7H15z" fill="#2c3038"/>
+ <rect x="17" y="27" width="30" height="13" rx="6" fill="#24272f"/>
+ <ellipse cx="25" cy="32" rx="3.2" ry="2.8" fill="#f7f6ed"/><ellipse cx="39" cy="32" rx="3.2" ry="2.8" fill="#f7f6ed"/>
+ <circle cx="25" cy="32" r="1.2" fill="#232323"/><circle cx="39" cy="32" r="1.2" fill="#232323"/>
+ <path d="M27 42q5 3 10 0" stroke="#9f5f53" stroke-width="1.5" fill="none"/>
+ </svg>`;
+const POLICE_ART=`<svg class="loot-character" viewBox="0 0 64 64" role="img" aria-label="Police officer">
+ <ellipse cx="32" cy="58" rx="22" ry="4" fill="#182b40" opacity=".25"/>
+ <path d="M12 58q1-16 20-16t20 16z" fill="#28558c" stroke="#133257" stroke-width="2"/>
+ <path d="M29 44l3 6 3-6" fill="#d5e6f6"/><path d="M32 50v8" stroke="#16345e" stroke-width="3"/>
+ <circle cx="43" cy="49" r="4" fill="#f6cb53" stroke="#89691d" stroke-width="1.5"/>
+ <ellipse cx="32" cy="29" rx="16" ry="16" fill="#deae88" stroke="#855c40" stroke-width="1.5"/>
+ <path d="M17 23q1-14 15-15 14 0 15 15z" fill="#1d3d66"/>
+ <path d="M12 24q20-11 40 0v6H12z" fill="#1f4674" stroke="#102b4c" stroke-width="1.5"/>
+ <path d="M27 14l5-3 5 3-1 7-4 3-4-3z" fill="#f0be45" stroke="#a17721" stroke-width="1"/>
+ <circle cx="26" cy="32" r="1.7" fill="#252b31"/><circle cx="38" cy="32" r="1.7" fill="#252b31"/>
+ <path d="M26 40q6-4 12 0" stroke="#895745" stroke-width="2" fill="none"/>
+ </svg>`;
+const ITEM_NAMES={'💎':'Diamond','💵':'Cash','💍':'Jewellery','⌚':'Watch','💰':'Money bag'};
+function grabLoot(L,host,api){
+ const cfg=L.cfg, map=cfg.map, rows=map.length,cols=map[0].length;
+ const key=(x,y)=>`${x},${y}`, walls=new Set(), treasures=[];
+ let start=null,exit=null;
+ for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+  const v=map[y][x];if(v==='#')walls.add(key(x,y));
+  if(v==='S')start={x,y};if(v==='E')exit={x,y};
+  if(v==='$')treasures.push({x,y,key:key(x,y),icon:cfg.items[treasures.length]||'💎'});
+ }
+ const open=(x,y)=>x>=0&&x<cols&&y>=0&&y<rows&&!walls.has(key(x,y));
+ const old=api.load(),sv=old?.mode==='loot-v2'?old:null;
+ let player={...start},caught=sv?.caught>=0&&Number.isInteger(sv.caught)?sv.caught:0;
+ if(sv&&Number.isInteger(sv.x)&&Number.isInteger(sv.y)&&open(sv.x,sv.y))player={x:sv.x,y:sv.y};
+ const validLoot=new Set(treasures.map(t=>t.key));
+ let collected=new Set(sv&&Array.isArray(sv.loot)?sv.loot.filter(v=>validLoot.has(v)):[]),
+  heading=sv?.heading&&['up','down','left','right'].includes(sv.heading)?sv.heading:null;
+ const DIRS={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+ const guards=cfg.guards.map((p,i)=>({x:p[0],y:p[1],homeX:p[0],homeY:p[1],dir:null,speed:cfg.guardMs[i],elapsed:0,rnd:rng(700+P.l*10+i)}));
+ if(sv&&Array.isArray(sv.guards))sv.guards.forEach((p,i)=>{
+  const g=guards[i];if(!g||!p)return;
+  if(Number.isInteger(p.x)&&Number.isInteger(p.y)&&open(p.x,p.y)){g.x=p.x;g.y=p.y}
+  if(['up','down','left','right'].includes(p.dir))g.dir=p.dir;
+ });
+ if(guards.some(g=>g.x===player.x&&g.y===player.y)){player={...start};heading=null}
+ let lastStep=0,frozen=0,finished=false,last=performance.now(),stepAccum=0,saveAccum=0;
+ host.innerHTML=`<section class="loot-shell"><div class="loot-top"><span>THE HEIST / FLOOR ${P.l+1}</span><span class="loot-tag">● COPS ON PATROL</span></div>
+  <p class="loot-objective"><b>Steal the valuables.</b> Stay clear of the cops. Grab everything, then make it to the green <b>EXIT</b>.</p>
+  <div class="loot-stats"><div><small>LOOT IN BAG</small><strong id="loot-count">0 / ${treasures.length}</strong></div><div><small>OFFICERS</small><strong>${guards.length}</strong></div><div><small>TIMES CAUGHT</small><strong id="loot-caught">${caught}</strong></div></div>
+  <div class="loot-board-frame" id="loot-frame"><div class="loot-board" id="loot-board" role="img" aria-label="Maze with masked robber, police officers, valuables and a green exit" style="grid-template-columns:repeat(${cols},minmax(0,1fr))"></div></div>
+  <div class="loot-key"><span>🥷 <b>YOU</b></span><span>👮 <b>POLICE</b></span><span>💎💵💍 <b>LOOT</b></span><span>🚪 <b>EXIT</b></span></div>
+  <div id="loot-message" class="loot-msg" role="status">Swipe or press an arrow to run. You keep moving until you hit a wall or press STOP.</div>
+  <div class="loot-controls"><div class="loot-dpad">
+   <span></span><button type="button" data-dir="up" aria-label="Run up">▲</button><span></span>
+   <button type="button" data-dir="left" aria-label="Run left">◀</button><button type="button" class="stop" data-dir="stop" aria-label="Stop moving">STOP</button><button type="button" data-dir="right" aria-label="Run right">▶</button>
+   <span></span><button type="button" data-dir="down" aria-label="Run down">▼</button><span></span>
+   </div><div class="loot-help"><b>SWIPE TO STEER · STOP TO WAIT</b><br>Guards roam unpredictably. Getting caught resets this floor and adds <b>5 seconds</b>.<small>Keyboard: arrow keys / WASD, Space to stop.</small></div></div>
+ </section>`;
+ const board=host.querySelector('#loot-board'),frame=host.querySelector('#loot-frame'),msg=host.querySelector('#loot-message');
+ const nodes=new Map();
+ for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+  const d=document.createElement('div');d.className='loot-cell';board.appendChild(d);nodes.set(key(x,y),d);
+ }
+ const guardAt=(x,y)=>guards.some(g=>g.x===x&&g.y===y);
+ function saveState(){if(finished)return;api.save({mode:'loot-v2',x:player.x,y:player.y,loot:[...collected],caught,heading,
+   guards:guards.map(g=>({x:g.x,y:g.y,dir:g.dir}))})}
+ host.gameSave=saveState;
+ function say(s,kind=''){msg.textContent=s;msg.className='loot-msg '+kind}
+ function draw(){if(!alive(host))return;
+  host.querySelector('#loot-count').textContent=`${collected.size} / ${treasures.length}`;
+  host.querySelector('#loot-caught').textContent=caught;
+  const remaining=new Map(treasures.filter(t=>!collected.has(t.key)).map(t=>[t.key,t]));
+  for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+   const k=key(x,y),d=nodes.get(k),t=remaining.get(k),isWall=walls.has(k),isExit=x===exit.x&&y===exit.y,
+    guard=guardAt(x,y),isPlayer=x===player.x&&y===player.y;
+   d.className='loot-cell'+(isWall?' is-wall':'')+(isExit?' is-exit':'')+(isExit&&collected.size===treasures.length?' unlocked':'')+(guard?' has-guard':'')+(isPlayer?' has-player':'');
+   d.innerHTML=isPlayer?ROBBER_ART:guard?POLICE_ART:t?`<span class="loot-item" title="${ITEM_NAMES[t.icon]||'Loot'}" aria-label="${ITEM_NAMES[t.icon]||'Loot'}">${t.icon}</span>`:isExit?'<span class="loot-exit">EXIT ↗</span>':'';
+  }
+ }
+ function busted(){if(finished||frozen>0)return;
+  caught++;api.penalty(5000);player={...start};heading=null;collected.clear();stepAccum=0;
+  for(const g of guards){g.x=g.homeX;g.y=g.homeY;g.dir=null;g.elapsed=0}
+  frozen=900;frame.classList.remove('caught');void frame.offsetWidth;frame.classList.add('caught');
+  say('BUSTED! +5 seconds. Loot lost — try this floor again.','bad');saveState();draw();
+ }
+ function stepPlayer(){if(!heading||frozen>0||finished)return;lastStep=performance.now();
+  const [dx,dy]=DIRS[heading],x=player.x+dx,y=player.y+dy;
+  if(!open(x,y)){heading=null;return}
+  player.x=x;player.y=y;
+  if(guardAt(x,y)){busted();return}
+  const k=key(x,y),found=treasures.find(t=>t.key===k);
+  if(found&&!collected.has(k)){
+   collected.add(k);say(`${found.icon} ${ITEM_NAMES[found.icon]||'Loot'} stolen! ${collected.size}/${treasures.length} collected.${collected.size===treasures.length?' Now get to the EXIT!':''}`,'good');
+  }
+  if(x===exit.x&&y===exit.y){
+   if(collected.size===treasures.length){finished=true;heading=null;host.gameSave=null;
+    say('ALL VALUABLES SECURED. CLEAN ESCAPE.','good');draw();api.complete();return}
+   else say(`EXIT LOCKED — ${treasures.length-collected.size} item(s) remain.`,'bad');
+  }
+  draw();saveState();
+ }
+ function chooseStep(g){
+  // Every officer makes its own fresh directional choice at each junction. Never uses a fixed patrol path.
+  const choices=Object.entries(DIRS).filter(([d,v])=>open(g.x+v[0],g.y+v[1])&&!(g.x+v[0]===exit.x&&g.y+v[1]===exit.y));
+  if(!choices.length)return;
+  const reverse={up:'down',down:'up',left:'right',right:'left'};
+  const weighted=choices.map(([d,v])=>({d,v,weight:d===g.dir?2.5:d===reverse[g.dir]?0.52:1.25}));
+  let r=g.rnd()*weighted.reduce((s,c)=>s+c.weight,0),pick=weighted[0];
+  for(const c of weighted){r-=c.weight;if(r<=0){pick=c;break}}
+  g.dir=pick.d;g.x+=pick.v[0];g.y+=pick.v[1];
+ }
+ function setHeading(dir){if(!alive(host)||!run||document.hidden||finished||frozen>0)return;
+  if(dir==='stop'){heading=null;say('Holding position. Police are still moving.');saveState();return}
+  if(!DIRS[dir])return;heading=dir;{const since=performance.now()-lastStep;if(since>=cfg.playerMs){stepAccum=0;stepPlayer()}else stepAccum=since}saveState();
+ }
+ host.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>setHeading(b.dataset.dir)));
+ document.onkeydown=e=>{if(!alive(host)||/INPUT|TEXTAREA|SELECT/.test(e.target?.tagName||''))return;
+  const d={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right',W:'up',S:'down',A:'left',D:'right', ' ':'stop'}[e.key];
+  if(d){e.preventDefault();if(!e.repeat||heading!==d)setHeading(d)}
+ };
+ let touch=null;
+ board.addEventListener('touchstart',e=>{if(e.touches.length===1)touch={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});
+ board.addEventListener('touchend',e=>{if(!touch||!e.changedTouches.length)return;
+  const dx=e.changedTouches[0].clientX-touch.x,dy=e.changedTouches[0].clientY-touch.y;touch=null;
+  if(Math.max(Math.abs(dx),Math.abs(dy))<16)return;
+  setHeading(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));
+ },{passive:true});
+ function tick(now){if(!alive(host)||finished)return;
+  const dt=Math.max(0,Math.min(110,now-last));last=now;
+  if(run&&!document.hidden){
+   if(frozen>0)frozen=Math.max(0,frozen-dt);
+   else{
+    stepAccum+=dt;saveAccum+=dt;
+    if(heading&&stepAccum>=cfg.playerMs){stepAccum%=cfg.playerMs;stepPlayer()}
+    if(!finished&&frozen===0){let moved=false;
+     for(const g of guards){g.elapsed+=dt;
+      if(g.elapsed>=g.speed){g.elapsed%=g.speed;chooseStep(g);moved=true;
+       if(g.x===player.x&&g.y===player.y){busted();break}
+      }
+     }
+     if(moved){draw();saveState()}
+    }
+    if(saveAccum>2500){saveAccum=0;saveState()}
+   }
+  }
+  requestAnimationFrame(tick);
+ }
+ if(collected.size===treasures.length)say('All valuables secured. Make for the green EXIT!','good');
+ draw();requestAnimationFrame(tick);
+}
+
+const CAR_LV=[
+{name:'City Streets',brief:'Swerve through the evening traffic and reach the end of the street without a scratch.',sp:395,gap:1.35,rows:22,dens:.4,seed:41,kinds:['sedan']},
+{name:'Highway Run',brief:'Faster, heavier traffic, and the police are right behind you. Stay clean.',sp:420,gap:1.1,rows:26,dens:.58,seed:42,kinds:['sedan','van','cop'],sirens:1},
+{name:'Roadblock Bridge',brief:'Full speed, vans and police roadblocks, and almost no room. The helipad is at the far end.',sp:445,gap:.98,rows:30,dens:.72,seed:43,kinds:['van','cop','block'],sirens:1}];
+function mkRows(c){const R=rng(c.seed),rows=[];let p=1+Math.floor(R()*2);
+ for(let i=0;i<c.rows;i++){p=Math.max(0,Math.min(3,p+Math.floor(R()*3)-1));const r=[];for(let l=0;l<4;l++)if(l!==p&&R()<c.dens)r.push({l,k:c.kinds[Math.floor(R()*c.kinds.length)],col:Math.floor(R()*5)});rows.push(r)}return rows}
+function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
+function drawCar(g,x,y,w,h,col,k,t){g.fillStyle='rgba(0,0,0,.4)';g.fillRect(x-w/2+3,y-h/2+5,w,h);g.fillStyle=col;rr(g,x-w/2,y-h/2,w,h,8);g.fill();
+ g.fillStyle='rgba(8,18,30,.88)';rr(g,x-w/2+5,y-h/2+h*.16,w-10,h*.2,4);g.fill();rr(g,x-w/2+5,y+h*.14,w-10,h*.14,4);g.fill();
+ if(k==='cop'){const f=Math.floor(t*8)%2;g.fillStyle=f?'#e23b41':'#3a7bff';g.fillRect(x-w/2+6,y-3,w/2-6,6);g.fillStyle=f?'#3a7bff':'#e23b41';g.fillRect(x,y-3,w/2-6,6)}}
+function carRun(L,host,api){
+ const c=L.cfg,rows=mkRows(c),W=360,H=560,PY=470,LX=l=>75+70*l,COL=['#8d9aa8','#5a7fa8','#b0b6bd','#7d5a8c','#4d6f5f'],
+ DIM={sedan:[44,78],van:[50,104],cop:[46,80],block:[58,26]},FIN=300+c.rows*c.gap*c.sp+260;
+ host.innerHTML=`<div class="hud3"><span>ROAD <b id="pc">0%</b></span><span>CRASHES <b id="cx">0</b></span></div>
+ <canvas id="cv" width="${W}" height="${H}" style="width:100%;max-width:360px;display:block;margin:0 auto;border:2px solid var(--brass);touch-action:none;background:#10151c"></canvas>
+ <div style="display:flex;gap:12px;max-width:360px;margin:10px auto"><button class="btn" id="cl" style="flex:1;font-size:30px">&#9664;</button><button class="btn" id="cr" style="flex:1;font-size:30px">&#9654;</button></div>
+ <p class="dim" style="text-align:center">Tap the left or right side of the road, use the buttons, or press the arrow keys. Touch anything and you crash: +${CONFIG.CRASH_PENALTY_MS/1000}s and the stretch restarts.</p>`;
+ const cv=host.querySelector('#cv'),g=cv.getContext('2d');let s,px,lane,ready,crash,last,crashes=0,t=0,done=false;
+ const go=d=>{if(ready>0||crash>0)return;lane=Math.max(0,Math.min(3,lane+d))};
+ function begin(){s=0;lane=1;px=LX(1);ready=1100;crash=0;last=performance.now()}
+ host.dbg=()=>({s,lane,rows,c,FIN,crashes});
+ host.querySelector('#cl').onpointerdown=e=>{e.preventDefault();go(-1)};host.querySelector('#cr').onpointerdown=e=>{e.preventDefault();go(1)};
+ cv.onpointerdown=e=>{const r=cv.getBoundingClientRect();go(e.clientX<r.left+r.width/2?-1:1)};
+ document.onkeydown=e=>{if(!alive(host))return;const d={ArrowLeft:-1,a:-1,A:-1,ArrowRight:1,d:1,D:1}[e.key];if(d){e.preventDefault();go(d)}};
+ let tx=null;cv.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+ cv.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>30)go(dx>0?1:-1)},{passive:true});
+ function draw(){g.fillStyle='#10151c';g.fillRect(0,0,W,H);
+  for(const side of[0,1])for(let i=0;i<8;i++){const y=(((i*90-s*.6)%720)+720)%720-120,x=side?322:0;g.fillStyle=i%2?'#0b1a2b':'#0e2238';g.fillRect(x,y,38,78);
+   for(let k=0;k<6;k++){g.fillStyle=(i*7+k*3+side)%4?'#16314d':'#e9c46a';g.fillRect(x+6+(k%2)*16,y+8+Math.floor(k/2)*22,8,10)}}
+  g.fillStyle='#1b222c';g.fillRect(40,0,280,H);g.fillStyle='#d6a64b';g.fillRect(38,0,3,H);g.fillRect(319,0,3,H);
+  g.fillStyle='rgba(232,238,244,.55)';for(let l=1;l<4;l++)for(let y=-60+(s%60);y<H;y+=60)g.fillRect(40+70*l-2,y,4,30);
+  for(let i=0;i<4;i++){const y=(((i*160-s)%640)+640)%640-60;for(const x of[44,316]){g.fillStyle='rgba(255,214,120,.18)';g.beginPath();g.arc(x,y,26,0,7);g.fill()}}
+  rows.forEach((r,i)=>{const d=300+i*c.gap*c.sp,y=PY-(d-s);if(y<-90||y>H+90)return;r.forEach(o=>{const[w,h]=DIM[o.k],x=LX(o.l);
+   if(o.k==='block'){g.fillStyle='#f2f2f2';g.fillRect(x-w/2,y-h/2,w,h);g.fillStyle='#e23b41';for(let k=0;k<5;k++)g.fillRect(x-w/2+k*12,y-h/2,6,h)}
+   else drawCar(g,x,y,w,h,o.k==='cop'?'#f0f3f6':o.k==='van'?'#c9c3ae':COL[o.col],o.k,t)})});
+  const fy=PY-(FIN-130-s);if(fy>-40&&fy<H){for(let k=0;k<14;k++){g.fillStyle=k%2?'#fff':'#111';g.fillRect(40+k*20,fy,20,12);g.fillStyle=k%2?'#111':'#fff';g.fillRect(40+k*20,fy+12,20,12)}}
+  g.fillStyle='rgba(255,236,170,.13)';g.beginPath();g.moveTo(px-14,PY-36);g.lineTo(px-34,PY-190);g.lineTo(px+34,PY-190);g.lineTo(px+14,PY-36);g.fill();
+  if(crash<=0||Math.floor(t*14)%2)drawCar(g,px,PY,40,76,'#d6a64b','player',t);
+  if(c.sirens){const f=Math.sin(t*9)>0;g.fillStyle=f?'rgba(226,59,65,.14)':'rgba(58,123,255,.14)';g.fillRect(f?0:W-60,0,60,H)}
+  if(crash>0){g.fillStyle='rgba(226,59,65,'+Math.min(.5,crash/1500)+')';g.fillRect(0,0,W,H);g.fillStyle='#fff';g.font='900 46px Impact,sans-serif';g.textAlign='center';g.fillText('CRASHED',W/2,250);g.font='24px Impact,sans-serif';g.fillText('+'+CONFIG.CRASH_PENALTY_MS/1000+'s',W/2,285)}
+  else if(ready>0){g.fillStyle='#fff';g.font='900 54px Impact,sans-serif';g.textAlign='center';g.fillText(ready>550?'READY':'GO!',W/2,250)}}
+ function loop(now){if(!alive(host)||done)return;const dt=Math.min(.08,(now-last)/1000);last=now;
+  if(run&&!document.hidden){t+=dt;px+=(LX(lane)-px)*Math.min(1,dt*13);
+   if(crash>0){crash-=dt*1000;if(crash<=0)begin()}
+   else if(ready>0)ready-=dt*1000;
+   else{s+=c.sp*dt;host.querySelector('#pc').textContent=Math.min(100,Math.floor(s/FIN*100))+'%';
+    for(let i=0;i<rows.length;i++){const y=PY-(300+i*c.gap*c.sp-s);if(y<PY-110||y>PY+110)continue;
+     for(const o of rows[i]){const[w,h]=DIM[o.k];if(Math.abs(LX(o.l)-px)<(w+40)/2*.8&&Math.abs(y-PY)<(h+76)/2*.85){crash=1400;crashes++;api.penalty(CONFIG.CRASH_PENALTY_MS);host.querySelector('#cx').textContent=crashes;beep(90,.4,'sawtooth');break}}if(crash>0)break}
+    if(crash<=0&&s>=FIN){done=true;draw();api.complete();return}}}
+  draw();requestAnimationFrame(loop)}
+ begin();requestAnimationFrame(loop)}
+
+function finale(){inPlay=false;run=false;$('#lv').textContent='Heist complete';$('#clock').textContent=fmt(total());
+ app.innerHTML=`<div class="card" style="padding:8px"><canvas id="fc" width="640" height="360" style="width:100%;display:block;background:#050c14"></canvas></div>
+ <div class="card" id="fres" style="opacity:0;transition:opacity 1.4s"><div class="stamp">Heist successful</div><h1>${fmt(total())}</h1><p>Total time across all four jobs, penalties included.</p>${recap()}<p class="dim">Your time is saved. The leaderboard goes up after the event.</p>
+ <button class="btn alt" id="rp">Replay the escape</button>${P.test?' <button class="btn alt" id="ls">Back to level select</button>':''}</div>`;
+ if(P.test)$('#ls').onclick=()=>login();sync('save');
+ const cv=$('#fc'),g=cv.getContext('2d'),W=640,H=360,ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)};let t0=performance.now(),ang=0,lastT=0;
+ $('#rp').onclick=()=>{t0=performance.now();$('#fres').style.opacity=0;lastT=0;requestAnimationFrame(fr)};
+ function crew(x,y,k){g.fillStyle='#c92a31';g.fillRect(x-7,y-16,14,18);g.beginPath();g.arc(x,y-22,7,0,7);g.fill();g.fillStyle='#efe6d2';g.beginPath();g.ellipse(x,y-22,5,6,0,0,7);g.fill();g.fillStyle='#d6a64b';g.fillRect(x+6,y-12,9,10)}
+ function fr(now){if(!document.body.contains(cv))return;const t=(now-t0)/1000,dt=Math.min(.05,t-lastT);lastT=t;
+  const sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#030811');sky.addColorStop(1,'#10304e');g.fillStyle=sky;g.fillRect(0,0,W,H);
+  for(let i=0;i<60;i++){g.fillStyle='rgba(255,255,255,'+(.3+.4*Math.abs(Math.sin(t*2+i)))+')';g.fillRect((i*97)%W,(i*53)%190,1+i%2,1+i%2)}
+  g.fillStyle='#f3e7c4';g.beginPath();g.arc(540,62,24,0,7);g.fill();
+  const pan=Math.max(0,t-3.4)*55;for(let i=0;i<14;i++){const h=60+(i*37)%90,x=((i*62-pan)%868+868)%868-100;g.fillStyle=i%2?'#0a1a2c':'#0d2137';g.fillRect(x,300-h,52,h+60);
+   for(let k=0;k<8;k++){g.fillStyle=(i+k)%3?'#16314d':'#e9c46a';g.fillRect(x+8+(k%3)*14,300-h+10+Math.floor(k/3)*18,7,9)}}
+  for(const o of[[120,1],[520,-1]]){const a=Math.sin(t*1.2+o[0])*.45*o[1],x=o[0];g.fillStyle='rgba(235,245,255,.1)';g.beginPath();g.moveTo(x,H);g.lineTo(x+Math.sin(a-.12)*420,H-420);g.lineTo(x+Math.sin(a+.12)*420,H-420);g.fill()}
+  g.fillStyle='#1b2733';g.fillRect(0,300,W,60);g.fillStyle='#26384a';g.fillRect(200,296,240,10);g.strokeStyle='#d6a64b';g.lineWidth=4;g.beginPath();g.arc(320,300,0,0,7);g.stroke();
+  g.fillStyle='#d6a64b';g.font='900 34px Impact,sans-serif';g.textAlign='center';g.fillText('H',320,336);
+  for(let i=0;i<3;i++){const p=ease((t-.2-i*.35)/1.7);if(p<=0||p>=1)continue;crew(-20+p*(300+i*10),300-Math.abs(Math.sin(t*14+i))*4,i)}
+  const lift=ease((t-2.8)/3.4),drift=ease((t-3.6)/4.2),hx=330+drift*470,hy=262-lift*210,tilt=drift*.18;
+  ang+=dt*Math.min(55,5+t*14);g.save();g.translate(hx,hy);g.rotate(tilt);
+  g.fillStyle='#222f3c';g.beginPath();g.ellipse(0,0,46,22,0,0,7);g.fill();g.fillRect(-92,-6,60,8);g.fillRect(-98,-18,6,26);
+  g.fillStyle='#8fc3e6';g.beginPath();g.ellipse(22,-4,20,12,0,0,7);g.fill();g.strokeStyle='#4a5b6b';g.lineWidth=4;g.beginPath();g.moveTo(-30,30);g.lineTo(34,30);g.moveTo(-14,18);g.lineTo(-14,30);g.moveTo(18,18);g.lineTo(18,30);g.stroke();
+  g.fillStyle='#d6a64b';g.fillRect(-2,-26,6,8);g.strokeStyle='rgba(220,230,240,.85)';g.lineWidth=5;const ca=Math.cos(ang)*92;g.beginPath();g.moveTo(-ca,-28);g.lineTo(ca,-28);g.stroke();
+  g.strokeStyle='rgba(220,230,240,.12)';g.beginPath();g.ellipse(0,-28,92,5,0,0,7);g.stroke();g.restore();
+  const hz=t>2.6&&hy>150?.0:0;if(t>6.2){g.globalAlpha=Math.min(1,(t-6.2)/1.2);g.fillStyle='#d6a64b';g.strokeStyle='#050c14';g.lineWidth=6;g.font='900 64px Impact,sans-serif';g.textAlign='center';g.strokeText('CLEAN GETAWAY',W/2,190);g.fillText('CLEAN GETAWAY',W/2,190);g.globalAlpha=1;$('#fres').style.opacity=1}
+  requestAnimationFrame(fr)}
+ requestAnimationFrame(fr)}
+
 const GAMES=[
 {name:'The Prep',tag:'Game 1: Crossword',how:'Tap a cell and type. Tap the same cell again to switch between Across and Down. Wrong letters cost nothing, but revealing a letter adds 10 seconds. Your clock only runs while this screen is open. Close the tab and it pauses; log back in with your roll number to carry on.',levels:LEVELS1,play:crossword},
-{name:'The Lock',tag:'Game 2: Lock cracking',levels:[1,2,3],play:null},
-{name:'The Fight',tag:'Game 3: Shooter',levels:[1,2,3],play:null},
-{name:'The Getaway',tag:'Game 4: Escape',levels:[1,2,3],play:null}];
+{name:'The Lock',tag:'Game 2: Lock cracking',how:'Three locks stand between you and the vault. Each one tests something different: timing, memory and wiring. Mistakes add 3 seconds to your clock. Your clock only runs while this screen is open.',
+ levels:[{name:'Pin Tumblers',brief:'Time your pick. Set all five pins by tapping when the marker is in the green zone.',fn:pins},
+ {name:'Combination',brief:'Memorise the sequence of dials and repeat it. Four rounds, getting longer.',fn:code},
+ {name:'Circuit Board',brief:'Rotate the wire tiles to connect the power source to the safe.',fn:wires}],play:(L,h,a)=>L.fn(L,h,a)},
+{name:'Grab the Loot',tag:'Game 3: Burglary',how:'Swipe or press an arrow to run through each floor. Your robber moves continuously until reaching a wall, turning or pressing STOP. Grab cash, diamonds and jewellery; dodge the randomly roaming police; exit when everything has been collected. Being caught adds 5 seconds and resets the floor.',
+ levels:MAZE_LEVELS.map(cfg=>({name:cfg.name,brief:cfg.brief,cfg,fn:grabLoot})),play:(L,h,a)=>L.fn(L,h,a)},
+{name:'The Getaway',tag:'Game 4: Escape',how:'Time to drive. Dodge the traffic, the police and the roadblocks across three stretches of road, with the helipad waiting at the end. Switch lanes by tapping the left or right side of the road, using the buttons or the arrow keys. Touch anything and you crash: 5 seconds are added and that stretch restarts. Your clock only runs while this screen is open.',
+ levels:CAR_LV.map(cfg=>({name:cfg.name,brief:cfg.brief,cfg,fn:carRun})),play:(L,h,a)=>L.fn(L,h,a)}];
 
 let P=null,run=false,last=0,inPlay=false;
 const KEY=r=>'sw_heist_'+r;
 const total=()=>Object.values(P.done).reduce((a,b)=>a+b,0)+P.cur;
 const save=()=>{try{localStorage.setItem(KEY(P.roll),JSON.stringify(P))}catch(e){}};
-function sync(kind,extra){if(!CONFIG.API_URL||!P)return;
+function sync(kind,extra){if(!CONFIG.API_URL||!P||P.test)return;
  fetch(CONFIG.API_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:kind,roll:P.roll,progress:P,total:total(),...extra})}).catch(()=>{})}
 function accrue(){if(run){const n=performance.now();P.cur+=n-last;last=n}}
 function startClock(){inPlay=true;run=true;last=performance.now()}
 function stopClock(){accrue();run=false;save()}
 setInterval(()=>{accrue();if(P){$('#clock').textContent=fmt(total())}},250);
 setInterval(()=>{if(run){accrue();save()}},5000);
-function away(){if(inPlay&&run){stopClock();sync('save');$('#pause').classList.remove('hide')}}
+function away(){if(inPlay&&run){$('#host')?.gameSave?.();stopClock();sync('save');$('#pause').classList.remove('hide')}}
 document.addEventListener('visibilitychange',()=>document.hidden&&away());
 addEventListener('pagehide',away);
 $('#resume').onclick=()=>{$('#pause').classList.add('hide');startClock()};
@@ -190,23 +529,26 @@ function login(msg){P=null;inPlay=false;$('#who').textContent='';$('#lv').textCo
   const score=p=>p?(p.g*10+p.l)*1e9+Object.keys(p.done).length*1e6+p.cur:-1;
   P=score(rem)>score(loc)?rem:loc;if(!P)P={roll,g:0,l:0,done:{},cur:0,saves:{}};P.roll=roll;P.saves=P.saves||{};if(nm)P.name=nm;
   save();$('#who').textContent=P.name?P.name.split(' ')[0]:roll;route()};
- $('#go').onclick=go}
+ $('#go').onclick=go;
+ if(/[?&]test/.test(location.search)){app.insertAdjacentHTML('beforeend','<div class="card"><h2>Test mode</h2><p class="dim">Jump straight to any level. Nothing played here is sent to the Sheet or counted.</p><div id="lsel"></div></div>');
+  GAMES.forEach((G,gi)=>{if(!G.play)return;G.levels.forEach((L,li)=>{const b=document.createElement('button');b.className='btn alt';b.style.cssText='margin:4px 6px 4px 0';b.textContent=(gi+1)+'.'+(li+1)+' '+L.name;
+   b.onclick=()=>{P={roll:'TEST',test:true,g:gi,l:li,done:{},cur:0,saves:{}};save();$('#who').textContent='TEST';route()};$('#lsel').appendChild(b)})})}}
 
-function route(){inPlay=false;run=false;const G=GAMES[P.g];$('#clock').textContent=fmt(total());
+function route(){inPlay=false;run=false;if(P.g>=GAMES.length)return finale();const G=GAMES[P.g];$('#clock').textContent=fmt(total());
  $('#lv').textContent='Job '+(P.g+1)+' / Level '+(P.l+1);
  if(!G.play)return soon();
  const L=G.levels[P.l],back=P.cur>0||P.g>0||P.l>0;
  app.innerHTML=`<div class="card"><h2>${G.tag}</h2><h1>${L.name}</h1><p>${L.brief}</p>${P.l===0&&P.cur===0?`<p>${G.how}</p>`:''}
  ${P.cur>0?'<p class="dim">Welcome back. Your clock is paused at '+fmt(total())+'.</p>':''}<p class="dim">The clock starts when you press the button.</p>
- <button class="btn" id="st">${P.cur>0?'Resume':'Start'}</button></div>`;
- $('#st').onclick=play}
+ <button class="btn" id="st">${P.cur>0?'Resume':'Start'}</button>${P.test?' <button class="btn alt" id="ls">Level select</button>':''}</div>`;
+ $('#st').onclick=play;if(P.test)$('#ls').onclick=()=>login()}
 function soon(){const G=GAMES[P.g];
  app.innerHTML=`<div class="card"><div class="stamp">Cleared</div><h1>${GAMES[P.g-1]?GAMES[P.g-1].name+' complete':'Nice work'}</h1><p>Total time so far: <b>${fmt(total())}</b></p>
- ${recap()}<p class="dim">${G.tag} is still being built for this prototype. Your progress is saved under your roll number.</p></div>`;sync('save')}
+ ${recap()}<p class="dim">${G.tag} is still being built for this prototype. Your progress is saved under your roll number.</p>${P.test?'<button class="btn alt" id="ls">Back to level select</button>':''}</div>`;if(P.test)$('#ls').onclick=()=>login();sync('save')}
 const recap=()=>'<table>'+Object.entries(P.done).map(([k,v])=>`<tr><td>Job ${k.split('-')[0]}, level ${k.split('-')[1]}</td><td>${fmt(v)}</td></tr>`).join('')+'</table>';
 
 function play(){const G=GAMES[P.g],L=G.levels[P.l];
- app.innerHTML=`<h2>${L.name}</h2><div id="host"></div>`;
+ document.onkeydown=null;app.innerHTML=`<h2>${L.name}</h2><div id="host"></div>`;
  const k=P.g+'-'+P.l;
  G.play(L,$('#host'),{load:()=>P.saves[k],save:s=>{P.saves[k]=s;save()},penalty:ms=>{P.cur+=ms},complete:()=>done()});
  startClock()}
@@ -214,10 +556,10 @@ function done(){stopClock();inPlay=false;const G=GAMES[P.g],ms=P.cur,key=(P.g+1)
  P.done[key]=ms;P.cur=0;delete P.saves[P.g+'-'+P.l];
  const lastLevel=P.l===G.levels.length-1;
  if(lastLevel){P.g++;P.l=0}else P.l++;save();sync('level',{level:key,ms});
- const nextG=GAMES[P.g];
+ const nextG=GAMES[P.g];if(!nextG)return finale();
  app.innerHTML=`<div class="card"><div class="stamp">${lastLevel?'Job cleared':'Level cleared'}</div>
  <h1>${fmt(ms)}</h1><p>Total time: <b>${fmt(total())}</b></p>
- <button class="btn" id="nx">${lastLevel?'Next job: '+(nextG?nextG.name:'finish'):'Next level'}</button></div>`;
+ <button class="btn" id="nx">${lastLevel?'Next job: '+(nextG?nextG.name:'The escape'):'Next level'}</button></div>`;
  $('#nx').onclick=route}
 login();
 </script></body></html>
